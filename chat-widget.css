@@ -1,0 +1,1019 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Public+Sans:wght@400;500;600;700&display=swap');
+
+/* =========================================================
+   TRAVEL AI CHATBOT
+   Premium Travel Assistant Interface
+   ========================================================= */
+
+.ltc-widget {
+  --teal-950: #082e2b;
+  --teal-900: #0e3d3a;
+  --teal-800: #14504a;
+  --teal-700: #1b5c56;
+
+  --gold-600: #b9863a;
+  --gold-500: #d9a441;
+  --gold-100: #f6e7c9;
+
+  --cream: #fbf7ee;
+  --cream-dark: #f3ecdc;
+
+  --ink: #20211d;
+  --muted: #77766d;
+  --border: #e4dcc8;
+  --white: #ffffff;
+
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+
+  z-index: 9999;
+
+  font-family:
+    'Public Sans',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+
+/* =========================================================
+   FLOATING BUTTON
+   ========================================================= */
+
+.ltc-fab {
+  width: 64px;
+  height: 64px;
+
+  border: 3px solid rgba(255,255,255,0.95);
+  border-radius: 50%;
+
+  background: var(--teal-900);
+  color: var(--gold-500);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 30px rgba(14,61,58,0.30);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+.ltc-fab:hover {
+  transform: translateY(-4px) scale(1.04);
+
+  background: var(--teal-800);
+
+  box-shadow:
+    0 15px 35px rgba(14,61,58,0.36);
+}
+
+.ltc-fab svg {
+  width: 27px;
+  height: 27px;
+}
+
+
+/* =========================================================
+   CHAT PANEL
+   ========================================================= */
+
+.ltc-panel {
+  position: absolute;
+
+  right: 0;
+  bottom: 80px;
+
+  width: 390px;
+  max-width: calc(100vw - 28px);
+
+  height: 625px;
+  max-height: calc(100vh - 105px);
+
+  background: var(--cream);
+
+  border-radius: 22px;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid rgba(14,61,58,0.12);
+
+  box-shadow:
+    0 28px 70px rgba(14,61,58,0.22),
+    0 8px 25px rgba(14,61,58,0.12);
+
+  animation: ltc-open .25s ease;
+}
+
+@keyframes ltc-open {
+
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.ltc-header {
+
+  min-height: 76px;
+
+  padding: 17px 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--teal-950),
+      var(--teal-900)
+    );
+
+  position: relative;
+}
+
+
+/* Small airplane decoration */
+
+.ltc-header::before {
+
+  content: "✈";
+
+  position: absolute;
+
+  right: 65px;
+  top: 9px;
+
+  font-size: 48px;
+
+  opacity: .055;
+
+  transform: rotate(-15deg);
+}
+
+
+.ltc-header-title {
+
+  font-family: 'Fraunces', Georgia, serif;
+
+  font-size: 20px;
+
+  font-weight: 600;
+
+  letter-spacing: .1px;
+}
+
+
+.ltc-header-sub {
+
+  margin-top: 4px;
+
+  color: #e8d9b5;
+
+  font-size: 11.5px;
+
+  font-weight: 400;
+}
+
+
+/* Online status */
+
+.ltc-header-sub::before {
+
+  content: "";
+
+  display: inline-block;
+
+  width: 6px;
+  height: 6px;
+
+  margin-right: 6px;
+
+  border-radius: 50%;
+
+  background: #7fc7a7;
+}
+
+
+/* Close */
+
+.ltc-close {
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,.15);
+
+  background: rgba(255,255,255,.08);
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 20px;
+
+  cursor: pointer;
+
+  transition: .15s ease;
+}
+
+.ltc-close:hover {
+
+  background: rgba(255,255,255,.17);
+
+  transform: rotate(5deg);
+}
+
+
+/* =========================================================
+   TICKET PERFORATION
+   ========================================================= */
+
+.ltc-perforation {
+
+  height: 18px;
+
+  position: relative;
+
+  background: var(--teal-900);
+
+  flex-shrink: 0;
+}
+
+.ltc-perforation::before {
+
+  content: "";
+
+  position: absolute;
+
+  left: 20px;
+  right: 20px;
+
+  top: 8px;
+
+  border-top: 2px dashed var(--gold-500);
+}
+
+.ltc-perforation-notch {
+
+  position: absolute;
+
+  top: 4px;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: var(--cream);
+}
+
+.ltc-perforation-notch.left {
+  left: -5px;
+}
+
+.ltc-perforation-notch.right {
+  right: -5px;
+}
+
+
+/* =========================================================
+   MESSAGE AREA
+   ========================================================= */
+
+.ltc-messages {
+
+  flex: 1;
+
+  overflow-y: auto;
+
+  padding: 17px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 11px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(217,164,65,.10),
+      transparent 35%
+    ),
+    var(--cream);
+}
+
+
+/* scrollbar */
+
+.ltc-messages::-webkit-scrollbar {
+  width: 5px;
+}
+
+.ltc-messages::-webkit-scrollbar-thumb {
+
+  background: #d8cfbe;
+
+  border-radius: 10px;
+}
+
+
+/* =========================================================
+   WELCOME MESSAGE
+   ========================================================= */
+
+.ltc-welcome {
+
+  background: white;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 3px 12px rgba(32,33,29,.07);
+
+  margin-bottom: 3px;
+}
+
+
+.ltc-welcome-image {
+
+  height: 125px;
+
+  background-image:
+    linear-gradient(
+      rgba(8,46,43,.18),
+      rgba(8,46,43,.18)
+    ),
+    url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=80");
+
+  background-size: cover;
+
+  background-position: center;
+}
+
+
+.ltc-welcome-content {
+
+  padding: 14px 15px 16px;
+}
+
+
+.ltc-welcome-title {
+
+  color: var(--teal-900);
+
+  font-family: 'Fraunces', Georgia, serif;
+
+  font-size: 18px;
+
+  font-weight: 600;
+
+  margin-bottom: 5px;
+}
+
+
+.ltc-welcome-text {
+
+  color: var(--muted);
+
+  font-size: 12.5px;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   MESSAGE BUBBLES
+   ========================================================= */
+
+.ltc-bubble {
+
+  max-width: 85%;
+
+  padding: 11px 14px;
+
+  font-size: 13.5px;
+
+  line-height: 1.55;
+
+  white-space: pre-wrap;
+
+  word-break: break-word;
+}
+
+
+/* Bot */
+
+.ltc-bot {
+
+  align-self: flex-start;
+
+  background: white;
+
+  color: var(--ink);
+
+  border-left: 3px solid var(--gold-500);
+
+  border-radius:
+    3px
+    14px
+    14px
+    14px;
+
+  box-shadow:
+    0 3px 10px rgba(32,33,29,.06);
+}
+
+
+/* User */
+
+.ltc-user {
+
+  align-self: flex-end;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--teal-900),
+      var(--teal-800)
+    );
+
+  border-radius:
+    14px
+    3px
+    14px
+    14px;
+
+  box-shadow:
+    0 4px 10px rgba(14,61,58,.14);
+}
+
+
+/* Typing */
+
+.ltc-typing {
+
+  opacity: .55;
+
+  font-style: italic;
+}
+
+
+/* =========================================================
+   SUGGESTED QUESTIONS
+   ========================================================= */
+
+.ltc-suggested {
+
+  padding: 12px 14px;
+
+  background: var(--cream-dark);
+
+  border-top: 1px solid var(--border);
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 7px;
+}
+
+
+.ltc-suggested button {
+
+  min-height: 36px;
+
+  padding: 7px 9px;
+
+  border-radius: 10px;
+
+  border: 1px solid #d9cdb7;
+
+  background: rgba(255,255,255,.82);
+
+  color: var(--teal-700);
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: .15s ease;
+}
+
+
+.ltc-suggested button:hover:not(:disabled) {
+
+  background: var(--gold-100);
+
+  border-color: var(--gold-500);
+
+  transform: translateY(-1px);
+}
+
+
+.ltc-suggested button:disabled {
+
+  opacity: .45;
+
+  cursor: default;
+}
+
+
+/* =========================================================
+   INPUT AREA
+   ========================================================= */
+
+.ltc-inputbar {
+
+  padding: 11px;
+
+  display: flex;
+
+  gap: 8px;
+
+  align-items: center;
+
+  background: var(--cream);
+
+  border-top: 1px solid var(--border);
+}
+
+
+.ltc-input {
+
+  flex: 1;
+
+  min-width: 0;
+
+  height: 43px;
+
+  padding: 0 13px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 12px;
+
+  background: white;
+
+  color: var(--ink);
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  transition: .15s ease;
+}
+
+
+.ltc-input:focus {
+
+  outline: none;
+
+  border-color: var(--gold-500);
+
+  box-shadow:
+    0 0 0 3px rgba(217,164,65,.16);
+}
+
+
+.ltc-input::placeholder {
+
+  color: #99978e;
+}
+
+
+.ltc-send {
+
+  height: 43px;
+
+  min-width: 68px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: var(--gold-500);
+
+  color: var(--teal-950);
+
+  font-family: inherit;
+
+  font-size: 12.5px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: .15s ease;
+}
+
+
+.ltc-send:hover:not(:disabled) {
+
+  background: var(--gold-600);
+
+  transform: translateY(-1px);
+}
+
+
+.ltc-send:disabled {
+
+  background: var(--border);
+
+  color: var(--muted);
+
+  cursor: default;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.ltc-footer {
+
+  padding: 8px 14px 11px;
+
+  background: var(--cream-dark);
+
+  border-top: 1px solid var(--border);
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  text-align: center;
+}
+
+
+.ltc-escalate {
+
+  display: inline-block;
+
+  margin-top: 3px;
+
+  color: var(--teal-700);
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+
+.ltc-escalate:hover {
+
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .ltc-widget {
+
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .ltc-fab {
+
+    width: 58px;
+    height: 58px;
+  }
+
+  .ltc-panel {
+
+    right: 0;
+    bottom: 70px;
+
+    width: calc(100vw - 24px);
+
+    height: min(650px, calc(100vh - 90px));
+
+    border-radius: 18px;
+  }
+
+  .ltc-welcome-image {
+
+    height: 105px;
+  }
+
+  .ltc-suggested {
+
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+/* =========================================================
+   BRAND ICON
+   ========================================================= */
+
+.ltc-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ltc-brand-icon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background: rgba(255,255,255,.11);
+
+  color: #d9a441;
+
+  font-size: 18px;
+
+  transform: rotate(-8deg);
+}
+
+
+/* =========================================================
+   QUICK ACTION TITLE
+   ========================================================= */
+
+.ltc-quick-title {
+
+  padding: 8px 14px 4px;
+
+  background: #f3ecdc;
+
+  color: #77766d;
+
+  font-size: 10.5px;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: .6px;
+}
+
+
+/* =========================================================
+   QUICK ACTION CARDS
+   ========================================================= */
+
+.ltc-suggested {
+
+  padding: 7px 14px 11px;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 7px;
+
+  background: #f3ecdc;
+
+  border-top: none;
+}
+
+
+.ltc-suggested button {
+
+  min-height: 47px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 7px 9px;
+
+  border-radius: 11px;
+
+  border: 1px solid #e1d7c3;
+
+  background: rgba(255,255,255,.9);
+
+  color: #1b5c56;
+
+  font-family: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform .15s ease,
+    border-color .15s ease,
+    background .15s ease;
+}
+
+
+.ltc-suggested button:hover:not(:disabled) {
+
+  transform: translateY(-1px);
+
+  border-color: #d9a441;
+
+  background: #fffaf0;
+}
+
+
+.ltc-suggested button > span {
+
+  width: 27px;
+  height: 27px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: #f6e7c9;
+
+  font-size: 14px;
+
+  flex-shrink: 0;
+}
+
+
+.ltc-suggested button div {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+
+.ltc-suggested strong {
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  color: #1b5c56;
+}
+
+
+.ltc-suggested small {
+
+  font-size: 9px;
+
+  color: #8a887f;
+}
+
+
+/* =========================================================
+   SEND ICON
+   ========================================================= */
+
+.ltc-send {
+
+  width: 43px;
+
+  min-width: 43px;
+
+  padding: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+.ltc-send span {
+
+  font-size: 17px;
+
+  transform: translateX(1px);
+}
+
+
+/* =========================================================
+   AI TYPING DOTS
+   ========================================================= */
+
+.ltc-typing {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  min-width: 48px;
+}
+
+
+.ltc-dot {
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: #b9863a;
+
+  animation:
+    ltc-dot-animation 1.2s infinite ease-in-out;
+}
+
+
+.ltc-dot:nth-child(2) {
+  animation-delay: .15s;
+}
+
+.ltc-dot:nth-child(3) {
+  animation-delay: .30s;
+}
+
+
+@keyframes ltc-dot-animation {
+
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: .4;
+  }
+
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+
+}
+
+
+/* =========================================================
+   WELCOME IMAGE
+   ========================================================= */
+
+.ltc-welcome-image {
+
+  height: 115px;
+
+  background-image:
+    linear-gradient(
+      rgba(8,46,43,.12),
+      rgba(8,46,43,.25)
+    ),
+    url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80");
+
+  background-size: cover;
+
+  background-position: center;
+}
+
+
+
+}
+
+
+

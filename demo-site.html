@@ -1,0 +1,816 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Wanderly Travels | Your Journey Starts Here</title>
+
+  <link rel="stylesheet" href="chat-widget.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f7f5ef;
+      color: #17221f;
+    }
+
+    /* =========================
+       NAVBAR
+       ========================= */
+
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+
+      padding: 24px 7%;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      color: white;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0.92;
+    }
+
+    nav a:hover {
+      opacity: 1;
+    }
+
+    .nav-button {
+      background: white;
+      color: #0e3d3a;
+      padding: 10px 19px;
+      border-radius: 30px;
+    }
+
+
+    /* =========================
+       HERO
+       ========================= */
+
+    .hero {
+      min-height: 680px;
+
+      display: flex;
+      align-items: center;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(7, 42, 39, 0.92),
+          rgba(7, 42, 39, 0.65),
+          rgba(7, 42, 39, 0.25)
+        ),
+        url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1800&q=85");
+
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-content {
+      width: 86%;
+      max-width: 1200px;
+      margin: auto;
+      padding-top: 50px;
+    }
+
+    .eyebrow {
+      color: #e7c98b;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      color: white;
+      font-family: 'Playfair Display', serif;
+
+      font-size: clamp(48px, 6vw, 78px);
+      line-height: 1.04;
+
+      max-width: 700px;
+
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      color: #e7c98b;
+    }
+
+    .hero p {
+      color: #e5eeeb;
+      max-width: 560px;
+
+      font-size: 17px;
+      line-height: 1.7;
+
+      margin-bottom: 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .primary-button,
+    .outline-button {
+      text-decoration: none;
+      padding: 14px 24px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .primary-button {
+      background: #e7c98b;
+      color: #0e3d3a;
+    }
+
+    .outline-button {
+      color: white;
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+
+    /* =========================
+       INTRO
+       ========================= */
+
+    .intro {
+      max-width: 1100px;
+      margin: auto;
+      padding: 90px 6% 65px;
+
+      text-align: center;
+    }
+
+    .intro small {
+      color: #a77b39;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 11px;
+    }
+
+    .intro h2 {
+      font-family: 'Playfair Display', serif;
+      color: #0e3d3a;
+
+      font-size: 40px;
+
+      margin: 10px 0 15px;
+    }
+
+    .intro p {
+      max-width: 650px;
+      margin: auto;
+
+      color: #68716d;
+      line-height: 1.7;
+    }
+
+
+    /* =========================
+       PHOTO CARDS
+       ========================= */
+
+    .destinations {
+      max-width: 1200px;
+      margin: auto;
+
+      padding: 0 5% 90px;
+
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr 0.75fr;
+
+      gap: 18px;
+    }
+
+    .destination-card {
+      position: relative;
+
+      height: 350px;
+
+      overflow: hidden;
+
+      border-radius: 20px;
+
+      background: #ddd;
+    }
+
+    .destination-card img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+
+      transition: transform 0.5s ease;
+    }
+
+    .destination-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .destination-overlay {
+      position: absolute;
+
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      padding: 28px 22px 22px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          transparent,
+          rgba(0,0,0,0.75)
+        );
+    }
+
+    .destination-overlay h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 25px;
+      margin-bottom: 4px;
+    }
+
+    .destination-overlay p {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+
+    /* =========================
+       SERVICES
+       ========================= */
+
+    .services {
+      background: #fbf7ee;
+      padding: 90px 5%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title small {
+      color: #a77b39;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .section-title h2 {
+      font-family: 'Playfair Display', serif;
+      color: #0e3d3a;
+      font-size: 38px;
+      margin-top: 10px;
+    }
+
+    .service-grid {
+      max-width: 1100px;
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+
+      gap: 18px;
+    }
+
+    .service-card {
+      background: white;
+
+      border: 1px solid #e5dfd1;
+
+      border-radius: 18px;
+
+      padding: 30px 24px;
+
+      transition: 0.25s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(14,61,58,0.09);
+    }
+
+    .service-icon {
+      font-size: 25px;
+      margin-bottom: 18px;
+    }
+
+    .service-card h3 {
+      color: #0e3d3a;
+      font-size: 17px;
+      margin-bottom: 9px;
+    }
+
+    .service-card p {
+      color: #70746f;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+
+    /* =========================
+       CTA
+       ========================= */
+
+    .cta {
+      max-width: 1100px;
+
+      margin: 80px auto;
+
+      padding: 55px 50px;
+
+      border-radius: 24px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(8,46,43,0.96),
+          rgba(14,61,58,0.91)
+        ),
+        url("https://images.unsplash.com/photo-1503220317375-aaad61436b1b?auto=format&fit=crop&w=1200&q=80");
+
+      background-size: cover;
+      background-position: center;
+
+      color: white;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 30px;
+    }
+
+    .cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .cta p {
+      max-width: 600px;
+      color: #d7e3df;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .cta-button {
+      background: #e7c98b;
+      color: #0e3d3a;
+
+      text-decoration: none;
+
+      padding: 14px 23px;
+
+      border-radius: 30px;
+
+      font-size: 13px;
+      font-weight: 700;
+
+      white-space: nowrap;
+    }
+
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    footer {
+      background: #092f2d;
+
+      color: #b9c8c4;
+
+      padding: 28px 5%;
+
+      text-align: center;
+
+      font-size: 12px;
+    }
+
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
+
+    @media (max-width: 850px) {
+
+      nav {
+        display: none;
+      }
+
+      .destinations {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .destination-card:first-child {
+        grid-column: span 2;
+      }
+
+      .service-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cta {
+        margin-left: 5%;
+        margin-right: 5%;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+
+    @media (max-width: 550px) {
+
+      .hero {
+        min-height: 620px;
+      }
+
+      .hero-content {
+        width: 88%;
+      }
+
+      .hero h1 {
+        font-size: 45px;
+      }
+
+      .intro h2 {
+        font-size: 32px;
+      }
+
+      .destinations {
+        grid-template-columns: 1fr;
+      }
+
+      .destination-card:first-child {
+        grid-column: auto;
+      }
+
+      .destination-card {
+        height: 280px;
+      }
+
+      .service-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta {
+        padding: 38px 28px;
+      }
+
+      .cta h2 {
+        font-size: 28px;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVIGATION
+     ========================= -->
+
+<header>
+
+  <div class="logo">
+    Wanderly.
+  </div>
+
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#chat" class="nav-button">
+      Plan My Trip
+    </a>
+  </nav>
+
+</header>
+
+
+<!-- =========================
+     HERO
+     ========================= -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="eyebrow">
+      Your journey starts here
+    </div>
+
+    <h1>
+      Discover the world.
+      <span>Your way.</span>
+    </h1>
+
+    <p>
+      From visa assistance and flight tickets to
+      carefully planned tours and travel insurance,
+      we're here to make your journey simple.
+    </p>
+
+    <div class="hero-buttons">
+
+      <a href="#services" class="primary-button">
+        Explore Our Services →
+      </a>
+
+      <a href="#chat" class="outline-button">
+        Ask Travel Assistant
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     INTRO
+     ========================= -->
+
+<section class="intro" id="destinations">
+
+  <small>
+    Inspiration for your next journey
+  </small>
+
+  <h2>
+    Places worth discovering
+  </h2>
+
+  <p>
+    Whether you're planning a peaceful escape,
+    a family holiday, or a spiritual journey,
+    let us help you get there.
+  </p>
+
+</section>
+
+
+<!-- =========================
+     DESTINATION PHOTOS
+     ========================= -->
+
+<section class="destinations">
+
+  <div class="destination-card">
+
+   <img
+  src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=85"
+  alt="Beautiful mountain landscape"
+>
+
+    <div class="destination-overlay">
+
+      <h3>Mountain Escapes</h3>
+
+      <p>
+        Breathtaking landscapes and unforgettable adventures
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="destination-card">
+
+    <img
+      src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=800&q=85"
+      alt="Dubai skyline"
+    >
+
+    <div class="destination-overlay">
+
+      <h3>Dubai</h3>
+
+      <p>
+        Modern cities, culture and luxury
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="destination-card">
+
+    <img
+      src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=85"
+      alt="Paris travel"
+    >
+
+    <div class="destination-overlay">
+
+      <h3>Europe</h3>
+
+      <p>
+        Explore iconic cities and timeless experiences
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     SERVICES
+     ========================= -->
+
+<section class="services" id="services">
+
+  <div class="section-title">
+
+    <small>
+      Travel made simple
+    </small>
+
+    <h2>
+      Everything you need
+    </h2>
+
+  </div>
+
+
+  <div class="service-grid">
+
+    <div class="service-card">
+
+      <div class="service-icon">✈️</div>
+
+      <h3>
+        Flight Tickets
+      </h3>
+
+      <p>
+        Find convenient flight options
+        for domestic and international travel.
+      </p>
+
+    </div>
+
+
+    <div class="service-card">
+
+      <div class="service-icon">🛂</div>
+
+      <h3>
+        Visa Assistance
+      </h3>
+
+      <p>
+        Guidance with requirements,
+        documents and visa preparation.
+      </p>
+
+    </div>
+
+
+    <div class="service-card">
+
+      <div class="service-icon">🌍</div>
+
+      <h3>
+        Holiday Tours
+      </h3>
+
+      <p>
+        Discover destinations through
+        thoughtfully planned travel experiences.
+      </p>
+
+    </div>
+
+
+    <div class="service-card">
+
+      <div class="service-icon">🛡️</div>
+
+      <h3>
+        Travel Insurance
+      </h3>
+
+      <p>
+        Travel with greater peace of mind
+        with suitable insurance options.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     CHAT CTA
+     ========================= -->
+
+<section class="cta" id="chat">
+
+  <div>
+
+    <h2>
+      Planning a trip?
+    </h2>
+
+    <p>
+      Our travel assistant can help you understand
+      visa requirements, travel options, tours,
+      insurance and more.
+    </p>
+
+  </div>
+
+  <a href="#" class="cta-button">
+    Start Planning →
+  </a>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+     ========================= -->
+
+<footer id="about">
+
+  © 2026 Wanderly Travels ·
+  Travel further. Travel smarter.
+
+</footer>
+
+
+<!-- =========================
+     YOUR EXISTING CHATBOT
+     ========================= -->
+
+<script
+  src="chat-widget.js"
+  data-api-base="http://127.0.0.1:8001">
+</script>
+
+
+
+</body>
+</html>
+
+
